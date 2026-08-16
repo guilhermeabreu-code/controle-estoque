@@ -1,5 +1,6 @@
 package com.guilhermeabreu.controle_estoque.service;
 
+import com.guilhermeabreu.controle_estoque.exception.ProdutoNaoEncontradoException;
 import com.guilhermeabreu.controle_estoque.model.Produto;
 import com.guilhermeabreu.controle_estoque.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
+                .orElseThrow(() -> new ProdutoNaoEncontradoException(id));
     }
 
     public Produto salvar(Produto produto) {
